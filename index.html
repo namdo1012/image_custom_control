@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="root">
+      <!-- IMAGE -->
+      <div class="image__container">
+        <img alt="dick-image" src="./img/dick.jpg" class="image__custom" />
+        <div class="text-to-img__container"></div>
+      </div>
+
+      <!-- CUSTOM BORDER RADIUS -->
+      <div class="app_row borderRadius__row">
+        <label for="borderRadius">Change border radius: </label>
+        <input type="text" id="borderRadiusInput" name="borderRadiusInput" />
+        <button class="button--border-radius" onclick="changeBorderRadius()">
+          Change
+        </button>
+        <button onclick="increaseBorderRadius()">Increase</button>
+        <button onclick="decreaseBorderRadius()">Decrease</button>
+        <label for="cars">Choose style:</label>
+
+        <select
+          name="borderRadiusSelect"
+          id="borderRadiusSelect"
+          onchange="handleChangeBorderRadiusSelect()"
+        >
+          <option value="round">Round</option>
+          <option value="square">Square</option>
+        </select>
+
+        <!-- CUSTOM BLEND MODE -->
+        <div class="app_row blendMode__row">
+          <select
+            name="blendBackground"
+            id="blendBackground"
+            onchange="handleChangeBlendBackground()"
+          >
+            <option value="orange">Orange</option>
+            <option value="aqua">Aqua</option>
+            <option value="violet">Violet</option>
+            <option value="green">Green</option>
+          </select>
+
+          <select
+            name="blendMode"
+            id="blendMode"
+            onchange="handleChangeBlendMode()"
+          >
+            <option value="Normal">Normal</option>
+            <option value="Multiply">Multiply</option>
+            <option value="Screen">Screen</option>
+            <option value="Overlay">Overlay</option>
+            <option value="Darken">Darken</option>
+            <option value="Lighten">Lighten</option>
+            <option value="Color-dodge">Color-dodge</option>
+            <option value="Color-burn">Color-burn</option>
+            <option value="Difference">Difference</option>
+            <option value="Exclusion">Exclusion</option>
+            <option value="Hue">Hue</option>
+            <option value="Saturation">Saturation</option>
+          </select>
+        </div>
+
+        <!-- SET TEXT TO IMAGE -->
+        <label for="textToImg">Inserting text to image: </label>
+        <input type="text" id="textToImg" name="textToImg" />
+        <button onclick="handleInsertTextToImg()">Insert to image</button>
+        <button onClick="removeInsertTextToImg()">Remove text</button>
+        <input type="text" id="valueFromTop" name="valueFromTop" />
+        <button onClick="changeTextPositionTop()">Top</button>
+        <input type="text" id="valueFromLeft" name="valueFromLeft" />
+        <button onClick="changeTextPositionLeft()">Left</button>
+        <input type="text" id="textFontSize" name="textFontSize" />
+        <button onClick="changeTextFontSize()">Change font size</button>
+        <button onclick="increaseTextFontSize()">Increase</button>
+        <button onclick="decreaseTextFontSize()">Decrease</button>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
