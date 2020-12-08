@@ -10,8 +10,8 @@ let valueFromLeft = 1;
 let textFontSize = 18;
 
 // DOM ELEMENTS
-const imageContainer = document.querySelector(".image__container");
-const image = document.querySelector(".image__custom");
+const imageContainer = document.querySelector(".uploaded_file_view");
+
 const inputBorderRadius = document.getElementById("borderRadiusInput");
 const inputTextToImg = document.getElementById("textToImg");
 const inputValueFromTop = document.getElementById("valueFromTop");
@@ -24,31 +24,35 @@ const textToImgContainer = document.querySelector(".text-to-img__container");
 
 // HANDLE FUNCTION
 function increaseBorderRadius() {
-  imageContainer.style.borderRadius = `${currentBorderRadiusValue++}px`;
+  const image = document.querySelector(".image__custom");
+  image.style.borderRadius = `${currentBorderRadiusValue++}px`;
 }
 
 function decreaseBorderRadius() {
-  imageContainer.style.borderRadius = `${currentBorderRadiusValue--}px`;
+  const image = document.querySelector(".image__custom");
+  image.style.borderRadius = `${currentBorderRadiusValue--}px`;
 }
 
 function changeBorderRadius() {
+  const image = document.querySelector(".image__custom");
   let inputValue = inputBorderRadius.value;
-  imageContainer.style.borderRadius = `${inputValue}px`;
+  image.style.borderRadius = `${inputValue}px`;
 
   // REASSIGN GLOBAL borderRadiusValue
   currentBorderRadiusValue = parseInt(inputBorderRadius);
 }
 
 function handleChangeBorderRadiusSelect() {
+  const image = document.querySelector(".image__custom");
   const selectedValue = selectedBorderRadius.value;
 
   if (selectedValue === "round") {
-    imageContainer.style.borderRadius = "250px";
+    image.style.borderRadius = "250px";
 
     // REASSIGN GLOBAL borderRadiusValue
     currentBorderRadiusValue = 250;
   } else if (selectedValue === "square") {
-    imageContainer.style.borderRadius = "0px";
+    image.style.borderRadius = "0px";
 
     // REASSIGN GLOBAL borderRadiusValue
     currentBorderRadiusValue = 0;
@@ -61,6 +65,7 @@ function handleChangeBlendBackground() {
 }
 
 function handleChangeBlendMode() {
+  const image = document.querySelector(".image__custom");
   const selectedValue = selectBlendMode.value;
   image.style.mixBlendMode = selectedValue.toLowerCase();
 }
@@ -72,6 +77,7 @@ function handleInsertTextToImg() {
 
 function removeInsertTextToImg() {
   textToImgContainer.innerHTML = "";
+  textToImgContainer.style.fontSize = 18;
 }
 
 function changeTextPositionTop() {
@@ -114,3 +120,35 @@ function increaseTextFontSize() {
 function decreaseTextFontSize() {
   textToImgContainer.style.fontSize = `${textFontSize--}px`;
 }
+
+// Handle upload image
+const btnUpload = $("#upload_file");
+const btnOuter = $(".button_outer");
+btnUpload.on("change", function (e) {
+  var ext = btnUpload.val().split(".").pop().toLowerCase();
+  if ($.inArray(ext, ["gif", "png", "jpg", "jpeg"]) == -1) {
+    $(".error_msg").text("Not an Image...");
+  } else {
+    $(".error_msg").text("");
+    btnOuter.addClass("file_uploading");
+    setTimeout(function () {
+      btnOuter.addClass("file_uploaded");
+    }, 3000);
+    var uploadedFile = URL.createObjectURL(e.target.files[0]);
+    setTimeout(function () {
+      $("#uploaded_view")
+        .append(
+          '<img class="image__custom" alt="image__custom" src="' +
+            uploadedFile +
+            '" />'
+        )
+        .addClass("show");
+    }, 3500);
+  }
+});
+$(".file_remove").on("click", function (e) {
+  $("#uploaded_view").removeClass("show");
+  $("#uploaded_view").find("img").remove();
+  btnOuter.removeClass("file_uploading");
+  btnOuter.removeClass("file_uploaded");
+});

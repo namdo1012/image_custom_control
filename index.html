@@ -6,9 +6,27 @@
   <body>
     <div class="root">
       <!-- IMAGE -->
-      <div class="image__container">
+      <!-- <div class="image__container">
         <img alt="dick-image" src="./img/dick.jpg" class="image__custom" />
         <div class="text-to-img__container"></div>
+      </div> -->
+
+      <div class="container">
+        <div class="panel">
+          <div class="button_outer">
+            <div class="btn_upload">
+              <input type="file" id="upload_file" name="" />
+              Upload Image
+            </div>
+            <div class="processing_bar"></div>
+            <div class="success_box"></div>
+          </div>
+        </div>
+        <div class="error_msg"></div>
+        <div class="uploaded_file_view" id="uploaded_view">
+          <div class="text-to-img__container"></div>
+          <span class="file_remove">X</span>
+        </div>
       </div>
 
       <!-- CUSTOM BORDER RADIUS -->
@@ -80,6 +98,8 @@
       </div>
     </div>
 
+    <!-- SCRIPT -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
