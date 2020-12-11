@@ -152,3 +152,28 @@ $(".file_remove").on("click", function (e) {
   btnOuter.removeClass("file_uploading");
   btnOuter.removeClass("file_uploaded");
 });
+
+// OUTPUT CSS HANDLER
+function showOuputCss() {
+  const outputCssContent = document.getElementById("css-output__content");
+  const outputCssBorder = document.querySelector(".css-output-border-toggle");
+
+  outputCssBorder.classList.remove("css-output--hide");
+  outputCssBorder.classList.add("flex");
+  console.log(outputCssContent);
+  // const outputCssContent = document.querySelector(".css-output__content");
+  // console.log(outputCssContent);
+  outputCssContent.innerHTML = `borderRadius: 10px<br/>
+    background-color: red<br/>
+    mix-blend-mode: dark<br/>
+    font-size: 10px<br/>
+    top: 10px<br/>
+    left: 10px <br/>`;
+}
+
+function showStyleCustom() {
+  const styleCustomContainer = document.getElementById("style-custom__content");
+  styleCustomContainer.classList
+    .remove("style-custom--hide")
+    .add("style-custom--show");
+}
