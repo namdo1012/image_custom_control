@@ -9,6 +9,16 @@ let valueFromTop = 1;
 let valueFromLeft = 1;
 let textFontSize = 18;
 
+// APP STATES
+const state = {
+  borderRadius: 0,
+  backgroundColor: "",
+  mixBlendMode: "",
+  fontSize: 16,
+  top: 0,
+  left: 0,
+};
+
 // DOM ELEMENTS
 const imageContainer = document.querySelector(".uploaded_file_view");
 
@@ -26,11 +36,17 @@ const textToImgContainer = document.querySelector(".text-to-img__container");
 function increaseBorderRadius() {
   const image = document.querySelector(".image__custom");
   image.style.borderRadius = `${currentBorderRadiusValue++}px`;
+
+  // Update state
+  state.borderRadius = currentBorderRadiusValue;
 }
 
 function decreaseBorderRadius() {
   const image = document.querySelector(".image__custom");
   image.style.borderRadius = `${currentBorderRadiusValue--}px`;
+
+  // Update state
+  state.borderRadius = currentBorderRadiusValue;
 }
 
 function changeBorderRadius() {
@@ -39,7 +55,11 @@ function changeBorderRadius() {
   image.style.borderRadius = `${inputValue}px`;
 
   // REASSIGN GLOBAL borderRadiusValue
-  currentBorderRadiusValue = parseInt(inputBorderRadius);
+  currentBorderRadiusValue = parseInt(inputValue);
+
+  // Update state
+  console.log("currentBorderRadiusValue", currentBorderRadiusValue);
+  state.borderRadius = currentBorderRadiusValue;
 }
 
 function handleChangeBorderRadiusSelect() {
@@ -57,17 +77,26 @@ function handleChangeBorderRadiusSelect() {
     // REASSIGN GLOBAL borderRadiusValue
     currentBorderRadiusValue = 0;
   }
+
+  // Update state
+  state.borderRadius = currentBorderRadiusValue;
 }
 
 function handleChangeBlendBackground() {
   const selectedValue = selectBackgroundColor.value;
   imageContainer.style.backgroundColor = selectedValue;
+
+  // Update state
+  state.backgroundColor = selectedValue;
 }
 
 function handleChangeBlendMode() {
   const image = document.querySelector(".image__custom");
   const selectedValue = selectBlendMode.value;
   image.style.mixBlendMode = selectedValue.toLowerCase();
+
+  // Update state
+  state.mixBlendMode = selectedValue.toLowerCase();
 }
 
 function handleInsertTextToImg() {
@@ -78,6 +107,9 @@ function handleInsertTextToImg() {
 function removeInsertTextToImg() {
   textToImgContainer.innerHTML = "";
   textToImgContainer.style.fontSize = 18;
+
+  // Update state
+  state.fontSize = 18;
 }
 
 function changeTextPositionTop() {
@@ -89,6 +121,9 @@ function changeTextPositionTop() {
 
   textToImgContainerStyle.top += valueFromTop;
   textToImgContainer.style.top = `${textToImgContainerStyle.top}px`;
+
+  // Update state
+  state.top = textToImgContainerStyle.top;
 }
 
 function changeTextPositionLeft() {
@@ -100,6 +135,9 @@ function changeTextPositionLeft() {
 
   textToImgContainerStyle.left += valueFromLeft;
   textToImgContainer.style.left = `${textToImgContainerStyle.left}px`;
+
+  // Update state
+  state.left = textToImgContainerStyle.left;
 }
 
 function changeTextFontSize() {
@@ -111,14 +149,23 @@ function changeTextFontSize() {
 
   // Chage font size
   textToImgContainer.style.fontSize = `${textFontSize}px`;
+
+  // Update state
+  state.fontSize = textFontSize;
 }
 
 function increaseTextFontSize() {
   textToImgContainer.style.fontSize = `${textFontSize++}px`;
+
+  // Update state
+  state.fontSize = textFontSize;
 }
 
 function decreaseTextFontSize() {
   textToImgContainer.style.fontSize = `${textFontSize--}px`;
+
+  // Update state
+  state.fontSize = textFontSize;
 }
 
 // Handle upload image
@@ -151,6 +198,10 @@ $(".file_remove").on("click", function (e) {
   $("#uploaded_view").find("img").remove();
   btnOuter.removeClass("file_uploading");
   btnOuter.removeClass("file_uploaded");
+
+  // Remove text
+
+  document.querySelector(".text-to-img__container").innerHTML = "";
 });
 
 // OUTPUT CSS HANDLER
@@ -160,20 +211,16 @@ function showOuputCss() {
 
   outputCssBorder.classList.remove("css-output--hide");
   outputCssBorder.classList.add("flex");
-  console.log(outputCssContent);
-  // const outputCssContent = document.querySelector(".css-output__content");
-  // console.log(outputCssContent);
-  outputCssContent.innerHTML = `borderRadius: 10px<br/>
-    background-color: red<br/>
-    mix-blend-mode: dark<br/>
-    font-size: 10px<br/>
-    top: 10px<br/>
-    left: 10px <br/>`;
+  outputCssContent.innerHTML = `borderRadius: ${state.borderRadius}px<br/>
+    background-color: ${state.backgroundColor} <br/>
+    mix-blend-mode: ${state.mixBlendMode}<br/>
+    font-size: ${state.fontSize}px<br/>
+    top: ${state.top}px<br/>
+    left: ${state.left}px<br/>`;
 }
 
 function showStyleCustom() {
   const styleCustomContainer = document.getElementById("style-custom__content");
-  styleCustomContainer.classList
-    .remove("style-custom--hide")
-    .add("style-custom--show");
+  styleCustomContainer.classList.remove("style-custom--hide");
+  styleCustomContainer.add("style-custom--show");
 }
